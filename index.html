@@ -334,10 +334,16 @@
     <section class="final-cta" id="signup">
         <h2>Stop guessing what your competitors charge</h2>
         <p>Join the waitlist. First 10 customers get 30 days free.</p>
-        <form class="signup-form" action="https://formspree.io/f/PLACEHOLDER" method="POST">
+        <form class="signup-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
             <input type="email" name="email" placeholder="your@company.com" required>
+            <input type="hidden" name="_subject" value="PriceWatch AI Waitlist Signup">
+            <input type="hidden" name="_cc" value="support@pricewatch.ai">
             <button type="submit" class="btn btn-primary">Join Waitlist</button>
         </form>
+        <p style="font-size:0.8rem;color:#8888a0;margin-top:1rem;">
+            <strong>Setup:</strong> Replace <code>YOUR_FORMSPREE_ID</code> with your Formspree form ID.<br>
+            Get one free at <a href="https://formspree.io" style="color:#6366f1;">formspree.io</a>
+        </p>
     </section>
 
     <footer>
