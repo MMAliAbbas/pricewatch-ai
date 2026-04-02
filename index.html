@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PriceWatch AI — SaaS Competitive Intelligence on Autopilot</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --border: #1e1e2e;
+            --text: #e4e4ef;
+            --muted: #8888a0;
+            --accent: #6366f1;
+            --accent-hover: #818cf8;
+            --green: #22c55e;
+            --orange: #f59e0b;
+            --red: #ef4444;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Nav */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo { font-weight: 700; font-size: 1.25rem; }
+        .logo span { color: var(--accent); }
+        nav a {
+            color: var(--muted);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+        }
+        nav a:hover { color: var(--text); }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 em {
+            font-style: normal;
+            background: linear-gradient(135deg, var(--accent), #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--muted);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+        .btn-primary:hover { background: var(--accent-hover); }
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .btn-secondary:hover { border-color: var(--muted); }
+
+        /* Social proof */
+        .proof {
+            text-align: center;
+            padding: 2rem;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        /* How it works */
+        .section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        .section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .step {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+        .step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        .step h3 { margin-bottom: 0.5rem; }
+        .step p { color: var(--muted); font-size: 0.9rem; }
+
+        /* Sample report */
+        .report-preview {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 700px;
+            margin: 2rem auto;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.85rem;
+        }
+        .report-preview .header { color: var(--accent); font-weight: 700; margin-bottom: 1rem; }
+        .report-preview .change { color: var(--orange); }
+        .report-preview .added { color: var(--green); }
+        .report-preview .removed { color: var(--red); }
+        .report-preview .muted { color: var(--muted); }
+
+        /* Pricing */
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .price-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+        .price-card.popular { border-color: var(--accent); }
+        .price-card .tier { font-size: 0.8rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.1em; }
+        .price-card .amount { font-size: 2.5rem; font-weight: 800; margin: 0.5rem 0; }
+        .price-card .amount span { font-size: 1rem; color: var(--muted); font-weight: 400; }
+        .price-card .period { color: var(--muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
+        .price-card ul { list-style: none; margin-bottom: 2rem; }
+        .price-card li {
+            padding: 0.4rem 0;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+        .price-card li::before { content: "✓ "; color: var(--green); }
+
+        /* CTA */
+        .final-cta {
+            text-align: center;
+            padding: 6rem 2rem;
+        }
+        .final-cta h2 { font-size: 2rem; margin-bottom: 1rem; }
+        .final-cta p { color: var(--muted); margin-bottom: 2rem; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Signup form */
+        .signup-form {
+            max-width: 500px;
+            margin: 2rem auto;
+            display: flex;
+            gap: 0.5rem;
+        }
+        .signup-form input {
+            flex: 1;
+            padding: 0.875rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            font-size: 1rem;
+        }
+        .signup-form input::placeholder { color: var(--muted); }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Price<span>Watch</span> AI</div>
+        <div>
+            <a href="#how">How it works</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#signup" class="btn btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Get Started</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Know when your competitors <em>change their pricing</em></h1>
+        <p>Automated daily monitoring of competitor pricing pages, changelogs, and feature updates. Get alerts before your customers notice.</p>
+        <div class="cta-group">
+            <a href="#signup" class="btn btn-primary">Start Free Trial</a>
+            <a href="#sample" class="btn btn-secondary">See Sample Report</a>
+        </div>
+    </section>
+
+    <div class="proof">
+        Tracking pricing changes for DevTools, HR-Tech, and E-commerce SaaS companies
+    </div>
+
+    <section class="section" id="sample">
+        <h2>What you get every morning</h2>
+        <div class="report-preview">
+            <div class="header">SaaS Competitive Intelligence Report — Apr 2, 2026</div>
+            <br>
+            <div><strong>Vercel</strong> (DevTools)</div>
+            <div class="change">  Price change: Pro plan $20/user/mo → $25/user/mo</div>
+            <div class="added">  New plan: "Scale" tier added at $50/user/mo</div>
+            <div class="muted">  Enterprise: unchanged (Custom)</div>
+            <br>
+            <div><strong>Linear</strong> (Project Management)</div>
+            <div class="muted">  No changes detected</div>
+            <br>
+            <div><strong>Lattice</strong> (HR-Tech)</div>
+            <div class="removed">  Removed: "Grow" add-on no longer listed</div>
+            <div class="change">  Engagement add-on: +$4/seat → +$6/seat</div>
+            <br>
+            <div class="muted">---</div>
+            <div class="muted">3 companies tracked • 2 with changes • Generated automatically</div>
+        </div>
+    </section>
+
+    <section class="section" id="how">
+        <h2>How it works</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h3>Add competitors</h3>
+                <p>Give us the pricing page URLs of the SaaS companies you want to track. Takes 30 seconds.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h3>We monitor daily</h3>
+                <p>Our automated pipeline scrapes pricing pages, changelogs, and feature lists every day.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h3>Get change alerts</h3>
+                <p>Receive a clean report whenever a competitor changes pricing, adds plans, or updates features.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="pricing">
+        <h2>Simple pricing</h2>
+        <div class="pricing-cards">
+            <div class="price-card">
+                <div class="tier">Starter</div>
+                <div class="amount">$49<span>/mo</span></div>
+                <div class="period">Up to 5 competitors</div>
+                <ul>
+                    <li>Daily pricing page monitoring</li>
+                    <li>Change detection & alerts</li>
+                    <li>Weekly summary reports</li>
+                    <li>Email delivery</li>
+                </ul>
+                <a href="#signup" class="btn btn-secondary" style="width:100%;text-align:center;display:block;">Start Free Trial</a>
+            </div>
+            <div class="price-card popular">
+                <div class="tier">Growth</div>
+                <div class="amount">$149<span>/mo</span></div>
+                <div class="period">Up to 20 competitors</div>
+                <ul>
+                    <li>Everything in Starter</li>
+                    <li>Changelog monitoring</li>
+                    <li>Feature diff tracking</li>
+                    <li>Slack/Discord alerts</li>
+                    <li>API access</li>
+                </ul>
+                <a href="#signup" class="btn btn-primary" style="width:100%;text-align:center;display:block;">Start Free Trial</a>
+            </div>
+            <div class="price-card">
+                <div class="tier">Scale</div>
+                <div class="amount">$299<span>/mo</span></div>
+                <div class="period">Unlimited competitors</div>
+                <ul>
+                    <li>Everything in Growth</li>
+                    <li>Status page monitoring</li>
+                    <li>Custom report branding</li>
+                    <li>Priority support</li>
+                    <li>Dedicated Slack channel</li>
+                </ul>
+                <a href="#signup" class="btn btn-secondary" style="width:100%;text-align:center;display:block;">Contact Sales</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta" id="signup">
+        <h2>Stop guessing what your competitors charge</h2>
+        <p>Join the waitlist. First 10 customers get 30 days free.</p>
+        <form class="signup-form" action="https://formspree.io/f/PLACEHOLDER" method="POST">
+            <input type="email" name="email" placeholder="your@company.com" required>
+            <button type="submit" class="btn btn-primary">Join Waitlist</button>
+        </form>
+    </section>
+
+    <footer>
+        PriceWatch AI &copy; 2026. Built by AliAI.
+    </footer>
+</body>
+</html>
